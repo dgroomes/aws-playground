@@ -9,7 +9,12 @@ import dgroomes.echo.Echo;
  */
 public class HelloWorldLambdaFunction {
 
-  public static String hello() {
-    return Echo.echo("Hello world from a Lambda function");
+  private final Echo echo;
+  public HelloWorldLambdaFunction(Echo echo) {
+    this.echo = echo;
+  }
+
+  public String hello() {
+    return echo.echo("Hello from an AWS Lambda function");
   }
 }

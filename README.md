@@ -37,7 +37,7 @@ This project is designed across a multi-module Gradle project:
 
 ## Instructions
 
-Follow these instructions to build the program, deploy it locally, and deploy it to AWS as a proper Lambda function:
+Follow these instructions to test the program, deploy it locally, and deploy it to AWS as a proper Lambda function:
 
 1. Use Java 11
 2. Run the test suite:
@@ -55,8 +55,8 @@ Follow these instructions to build the program, deploy it locally, and deploy it
    * It should respond with something like:
      ```json
      {
-       "message": "Hello from an AWS Lambda function!",
-       "deployment-environment": "local-web-server"
+       "message" : "Hello from an AWS Lambda function!",
+       "deployment-environment" : "local"
      }
      ```
 5. Build the program distribution:
@@ -80,9 +80,9 @@ Follow these instructions to build the program, deploy it locally, and deploy it
 
 General clean-ups, TODOs and things I wish to implement for this project:
 
-* Implement `echo/`. Use Jackson.
-* Implement `hello-world-lambda`.
-* Implement `runner`.  Use Apache HttpComponents for a simple web server
+* [X] DONE Implement `echo/`. Use Jackson.
+* [ ] Implement `hello-world-lambda`.
+* [ ] Implement `runner`.  Use Apache HttpComponents for a simple web server
 
 
 ## Reference

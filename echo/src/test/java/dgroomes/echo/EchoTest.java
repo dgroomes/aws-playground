@@ -2,16 +2,17 @@ package dgroomes.echo;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class EchoTest {
 
   @Test
   void echo() {
+    Echo echo = new Echo("test-suite");
     String message = "Hi there";
 
-    String echoedMessage = Echo.echo(message);
+    String json = echo.echo(message);
 
-    assertEquals("Hi there!", echoedMessage);
+    assertThat(json).isEqualToIgnoringWhitespace("{\"message\":\"Hi there!\", \"deployment-environment\":\"test-suite\"}");
   }
 }

@@ -1,10 +1,13 @@
 package dgroomes.runner;
 
+import dgroomes.echo.Echo;
 import dgroomes.helloworldlambda.HelloWorldLambdaFunction;
 
 public class Runner {
   public static void main(String[] args) {
-    var message = HelloWorldLambdaFunction.hello();
-    System.out.println(message);
+    HelloWorldLambdaFunction helloWorldLambdaFunction = new HelloWorldLambdaFunction(new Echo("local"));
+
+    var json = helloWorldLambdaFunction.hello();
+    System.out.println(json);
   }
 }

@@ -34,6 +34,8 @@ This project is designed across a multi-module Gradle project:
 * `echo/`
   * This is a toy library. It echos a given message into a JSON string. 
 
+The program is uploaded to AWS and a Lambda *function URL* is configured to execute the Lambda function.  
+
 
 ## Instructions
 
@@ -50,7 +52,7 @@ Follow these instructions to test the program, deploy it locally, and deploy it 
      ```
    * A local web server is serving the program. Interact with it with the following `curl` command.
    * ```shell
-     curl http://[::1]:8080/hello-world
+     curl http://localhost:8080/hello-world
      ```
    * It should respond with something like:
      ```json
@@ -75,6 +77,23 @@ Follow these instructions to test the program, deploy it locally, and deploy it 
      }
      ```
 
+## Observations
+
+Here are some of my observations during my learning journey:
+
+* AWS Lambda is inexpensive for use-cases that are not huge
+* AWS Lambda gives a good developer experience, especially if you stay on the paved road. I would suggest, for example,
+  that you stick with the official runtimes and not build a custom runtime. You are free to build a custom runtime, but
+  if you can afford to exercise that amount of sophistication, I think you should consider deploying to a more generic
+  product, like ECS (Elastic Container Service). Consider a Java-based lambda function. You'll be tempted to create a
+  custom Java runtime image because you just know in your bones how overpowered Java is for short-lived requests. Java
+  excels at high throughput, where things like the just-in-time compiler kick in. So you might want to create a reduced-size
+  custom Java runtime image for your Lambda function. But then your Lambda development experience has gone from a "upload this ZIP file"
+  to "use jlink and a shell script to build a custom JRE with esoteric options, hard-to-explain value, and someting about
+  AWS 'layers', and then also layer in your program onto it." Low reward in my opinion.
+* I'm surprised that AWS Lambda doesnt' support Java 17 in May 2022, when Java 17 has been out for ever 6 months and it
+  has been known for a few years that Java 17 was going to be an LTS release. 
+
 
 ## Wish List
 
@@ -85,10 +104,13 @@ General clean-ups, TODOs and things I wish to implement for this project:
   the .zip but the main module ('hello-world-lambda') is in class files in directories. I'm not really sure what AWS Lambda
   needs exactly) Build the distribution zip
 * [x] DONE Implement `hello-world-lambda`.
-* [ ] Implement `runner`.  Use Apache HttpComponents for a simple web server
+* [ ] IN PROGRESS Implement `runner`.  Use Apache HttpComponents for a simple web server
+* [ ] Rename 'runner' to 'simulator'
+* [ ] Can HttpComponents serve ipv6?
 
 
 ## Reference
 
 * [AWS docs: *AWS Lambda function handler in Java*](https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html?icmpid=docs_lambda_help)
 * [AWS docs: *Deploy Java Lambda functions with .zip or JAR file archives*](https://docs.aws.amazon.com/lambda/latest/dg/java-package.html)
+* [AWS docs: *Lambda function URLs*](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html)

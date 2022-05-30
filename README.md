@@ -81,6 +81,9 @@ Follow these instructions to test the program, deploy it locally, and deploy it 
 General clean-ups, TODOs and things I wish to implement for this project:
 
 * [X] DONE Implement `echo/`. Use Jackson.
+* [x] DONE (this appeared to do what I needed it to, but I'm not sure if it's right. The libraries are in .jar files in
+  the .zip but the main module ('hello-world-lambda') is in class files in directories. I'm not really sure what AWS Lambda
+  needs exactly) Build the distribution zip
 * [ ] Implement `hello-world-lambda`.
 * [ ] Implement `runner`.  Use Apache HttpComponents for a simple web server
 

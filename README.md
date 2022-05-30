@@ -28,9 +28,9 @@ This project is designed across a multi-module Gradle project:
 * `hello-world-lambda/`
   * The  is the module of importance. The `:hello-world-lambda` module represents the actual *Lambda function*. Specifically,
     it has a class (? class name) that implements the AWS Handler interface (? name).
-* `runner/`
-  * This is a runnable Java program that serves the Lambda function in a local web server. The `:runner` module is only
-    useful for your local development workflow. This module does not get published to AWS.
+* `simulator/`
+  * Simulates the AWS Lambda deployment environment. This is a runnable Java program that serves the Lambda function in
+    a local web server. This is useful for your local development workflow.
 * `echo/`
   * This is a toy library. It echos a given message into a JSON string. 
 
@@ -46,9 +46,9 @@ Follow these instructions to test the program, deploy it locally, and deploy it 
    * ```shell
      ./gradlew test
      ```
-4. Build and deploy the program locally:
+4. Deploy the program locally in the Lambda simulator:
    * ```shell
-     ./gradlew :runner:run
+     ./gradlew :simulator:run
      ```
    * A local web server is serving the program. Interact with it with the following `curl` command.
    * ```shell
@@ -104,8 +104,8 @@ General clean-ups, TODOs and things I wish to implement for this project:
   the .zip but the main module ('hello-world-lambda') is in class files in directories. I'm not really sure what AWS Lambda
   needs exactly) Build the distribution zip
 * [x] DONE Implement `hello-world-lambda`.
-* [ ] IN PROGRESS Implement `runner`.  Use Apache HttpComponents for a simple web server
-* [ ] Rename 'runner' to 'simulator'
+* [ ] IN PROGRESS Implement `simulator`.  Use Apache HttpComponents for a simple web server
+* [x] DONE Rename 'runner' to 'simulator'
 * [ ] Can HttpComponents serve ipv6?
 
 

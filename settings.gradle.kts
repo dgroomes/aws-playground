@@ -1,2 +1,2 @@
 rootProject.name = "aws-playground"
-include("hello-world-lambda", "runner", "echo")
+include("hello-world-lambda", "simulator", "echo")

@@ -11,5 +11,5 @@ dependencies {
 }
 
 application {
-    mainClass.set("dgroomes.runner.LambdaSimulator")
+    mainClass.set("dgroomes.simulator.LambdaSimulator")
 }

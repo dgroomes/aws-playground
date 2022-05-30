@@ -21,7 +21,7 @@ public class HelloWorldLambdaFunction implements RequestHandler<Map<String, Stri
   }
 
   /**
-   * This is a non-default constructor. It will be called by user-code like the JUnit test-suite or the ':runner' module.
+   * This is a non-default constructor. It will be called by user-code like the JUnit test-suite or the ':simulator' module.
    */
   public HelloWorldLambdaFunction(Echo echo) {
     this.echo = echo;

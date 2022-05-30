@@ -61,9 +61,9 @@ Follow these instructions to test the program, deploy it locally, and deploy it 
      ```
 5. Build the program distribution:
    * ```shell
-     ./gradlew build
+     ./gradlew :hello-world-lambda:buildZip
      ```
-   * This builds the program distribution as a .zip file in `hello-world-lambda/build/hello-world-lambda.zip`
+   * This builds the program distribution as a .zip file in `hello-world-lambda/build/distributions/hello-world-lambda.zip`
 6. Deploy the lambda function to AWS
    * Upload the program distribution .zip file using the AWS Lambda dashboard in the browser.
 7. Try it!
@@ -80,11 +80,11 @@ Follow these instructions to test the program, deploy it locally, and deploy it 
 
 General clean-ups, TODOs and things I wish to implement for this project:
 
-* [X] DONE Implement `echo/`. Use Jackson.
+* [x] DONE Implement `echo/`. Use Jackson.
 * [x] DONE (this appeared to do what I needed it to, but I'm not sure if it's right. The libraries are in .jar files in
   the .zip but the main module ('hello-world-lambda') is in class files in directories. I'm not really sure what AWS Lambda
   needs exactly) Build the distribution zip
-* [ ] Implement `hello-world-lambda`.
+* [x] DONE Implement `hello-world-lambda`.
 * [ ] Implement `runner`.  Use Apache HttpComponents for a simple web server
 
 

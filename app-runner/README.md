@@ -26,17 +26,22 @@ deploy it using AWS App Runner.
        "favorite_color": "blue"
      }
      ```
-5. Build the program distribution:
+4. Build the program distribution:
    * ```shell
      ./gradlew installDist
      ```
-6. Build the Docker image:
+5. Build the Docker image:
    * ```shell
      docker build . -t dgroomes-aws-playground-app-runner:local
      ```
-7. Upload it
+6. Run the program as a Docker container:
+   * ```shell
+     docker run --rm -p 8080:8080 dgroomes-aws-playground-app-runner:local
+     ```
+   * Consider using the earlier `curl` command to exercise the server.
+8. Upload it
    * TODO
-8. Deploy it
+9. Deploy it
    * TODO
 
 
@@ -44,7 +49,7 @@ deploy it using AWS App Runner.
 
 General clean-ups, TODOs and things I wish to implement for this project:
 
-* [ ] Build the Docker image
+* [x] DONE Build the Docker image
 * [ ] Upload to AWS
 
 

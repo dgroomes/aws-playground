@@ -1,6 +1,6 @@
 # lambda
 
-This project builds a Lambda function with Java 11 and exposes it via a Lambda *function URL*.
+This project builds an AWS Lambda function with Java 11 and exposes it via a Lambda *function URL*.
 
 
 ## Design

@@ -27,7 +27,7 @@ The sub-projects include:
 
 ### `lambda/`
 
-This beginner-friendly sub-project creates a custom JMeter "Sampler" to exercise some custom Java code.
+This project builds an AWS Lambda function with Java 11 and exposes it via a Lambda *function URL*.
 
 See the README in [lambda/](lambda/).
 

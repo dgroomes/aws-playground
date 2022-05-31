@@ -21,8 +21,9 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
     implementation("org.apache.httpcomponents.client5:httpclient5:$httpComponentsV5Version")
     implementation(platform("com.fasterxml.jackson:jackson-bom:$jacksonVersion"))
+    implementation("com.fasterxml.jackson.core:jackson-databind")
 }
 
 application {
-    mainClass.set("dgroomes.Main")
+    mainClass.set("dgroomes.Runner")
 }

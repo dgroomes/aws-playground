@@ -14,17 +14,29 @@ deploy it using AWS App Runner.
    * ```shell
      ./gradlew run
      ```
-4. Build the program distribution:
+3. Exercise the server with a sample request:
+   * ```shell
+     curl "http://localhost:8080?who=me&favorite_color=blue"
+     ```
+   * It should respond with:
+     ```json
+     {
+       "message": "You called this endpoint with 2 query parameters. They are listed below.",
+       "who": "me",
+       "favorite_color": "blue"
+     }
+     ```
+5. Build the program distribution:
    * ```shell
      ./gradlew installDist
      ```
-5. Build the Docker image:
+6. Build the Docker image:
    * ```shell
      docker build . -t dgroomes-aws-playground-app-runner:local
      ```
-6. Upload it
+7. Upload it
    * TODO
-7. Deploy it
+8. Deploy it
    * TODO
 
 

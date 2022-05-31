@@ -48,24 +48,4 @@ class SimulatorHttpHandler implements HttpRequestHandler {
       response.setEntity(responseBody);
     }
   }
-
-  /**
-   * Extract the query parameters from the HTTP request.
-   * <p>
-   * Note: It is surprisingly verbose to extract the query parameters from a {@link HttpRequest}.
-   *
-   * @return a map of the query parameters, keyed by named.
-   */
-  private static Map<String, String> getQueryParams(HttpRequest request) {
-    URI uri;
-    try {
-      uri = request.getUri();
-    } catch (URISyntaxException ex) {
-      throw new IllegalStateException("Failed to parse the URI of an incoming HTTP request", ex);
-    }
-
-    List<NameValuePair> queryParams = new URIBuilder(uri).getQueryParams();
-
-    return queryParams.stream().collect(Collectors.toMap(NameValuePair::getName, NameValuePair::getValue));
-  }
 }

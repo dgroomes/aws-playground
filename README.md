@@ -31,6 +31,11 @@ This project builds an AWS Lambda function with Java 11 and exposes it via a Lam
 
 See the README in [lambda/](lambda/).
 
+### `app-runner/`
+
+An example microservice deployed to AWS App Runner.
+
+See the README in [app-runner/](app-runner/).
 
 ## Wish List
 

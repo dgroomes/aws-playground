@@ -47,7 +47,7 @@ General clean-ups, TODOs and things I wish to implement for this project:
 * [ ] Consider renaming the 'echo' module something like 'data-enricher'. In playground examples, I want to model at
   vaguely realistic and useful problems and solutions. If I retool 'echo' as more of a message enricher which has to deal
   with JSON, then it becomes more interesting. And usefully, it can still be de-coupled from the Lambda code.
-* [ ] Make an AWS App Runner example. To me, App Runner is at the same level of convenience as Lambda. It's just at a (much) 
+* [ ] IN PROGRESS Make an AWS App Runner example. To me, App Runner is at the same level of convenience as Lambda. It's just at a (much) 
   higher price point because of the always-on thing.
 
 ## Reference

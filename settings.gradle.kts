@@ -1,4 +1,4 @@
-rootProject.name = "jmeter-playground"
+rootProject.name = "aws-playground"
 
 // What is the point of defining a Gradle project in the root of this repository? After all, each of the sub-projects
 // are independently runnable... What does it mean to "run the root project"?
@@ -23,3 +23,4 @@ rootProject.name = "jmeter-playground"
 // clones this repo and opens it in Intellij, all the sub-projects are automatically identified by Intellij and indexed.
 // You get code completion and project navigation out-of-the-box. Pretty slick!
 includeBuild("lambda")
+includeBuild("app-runner")

@@ -1,6 +1,9 @@
 # app-runner
 
-NOT YET IMPLEMENTED
+ABANDONED. I can't get this work in AWS. It fails on the health check. My first attempt showed the expected container log statement: "INFO dgroomes.Runner - The server is running and serving traffic on port 8080"
+but my second attempt, it didn't even show that. I'm not sure what's going on. I'm able to run the container locally with 
+`docker run --rm -p 8080:8080 "$AWS_ECS_REGISTRY/aws-playground-app-runner:2"`. It stars up right away. I allocated 1vCPU
+and 2GB memory. I'm not sure AWS App Runner is ready for prime time. 
 
 An example microservice deployed to AWS App Runner.
 
@@ -50,11 +53,11 @@ deploy it using AWS App Runner.
    * Finally, tag the Docker image with a unique tag (I enabled
      immutable images in my ECR repo) with a command like the following.
    * ```shell
-     docker tag aws-playground-app-runner:local "$AWS_ECS_REGISTRY/aws-playground-app-runner:1"
+     docker tag aws-playground-app-runner:local "$AWS_ECS_REGISTRY/aws-playground-app-runner:2"
      ```
    * Push the image
    * ```shell
-     docker push "$AWS_ECS_REGISTRY/aws-playground-app-runner:1"
+     docker push "$AWS_ECS_REGISTRY/aws-playground-app-runner:2"
      ```
 9. Deploy it
    * TODO
@@ -71,4 +74,5 @@ General clean-ups, TODOs and things I wish to implement for this project:
 
 ## Reference
 
+* [AWS App Runner](https://aws.amazon.com/apprunner/)
 * [AWS Elastic Container Registry](https://aws.amazon.com/ecr/)

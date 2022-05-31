@@ -7,3 +7,5 @@ COPY build/install/app-runner /opt/app
 
 # Invoke the "start script".
 CMD ["/opt/app/bin/app-runner"]
+
+EXPOSE 8080

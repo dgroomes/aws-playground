@@ -1,7 +1,5 @@
 # aws-playground
 
-NOT YET FULLY IMPLEMENTED
-
 📚 Learning and exploring AWS (Amazon Web Services).
 
 > Amazon Web Services (AWS) is the world’s most comprehensive and broadly adopted cloud platform, offering over 200
@@ -32,6 +30,7 @@ This project is designed across a multi-module Gradle project:
   * Simulates the AWS Lambda deployment environment. This is a runnable Java program that serves the Lambda function in
     a local web server. This is useful for your local development workflow. The simulator maps the HTTP request to an
     event object and invokes the function. Related: [AWS Lambda docs: *Request and response payloads*](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html#urls-payloads).
+    Similarly, it base 64 encodes the payload, which Lambda also does. 
 * `echo/`
   * This is a toy library. It echos a given message into a JSON string. 
 
@@ -53,9 +52,7 @@ Follow these instructions to test the program, deploy it locally, and deploy it 
      ```
    * A local web server is serving the program. Interact with it with the following `curl` command.
    * ```shell
-     curl -X POST http://localhost:8080/ -d '
-     { "message": "Hello" }
-     '
+     curl -X POST http://localhost:8080/ -d '{ "message": "Hello" }'
      ```
    * It should respond with something like:
      ```json
@@ -72,11 +69,16 @@ Follow these instructions to test the program, deploy it locally, and deploy it 
 6. Deploy the lambda function to AWS
    * Upload the program distribution .zip file using the AWS Lambda dashboard in the browser.
 7. Try it!
-   * Try it out for size. Use a Lambda *Test Event* to exercise the Lambda function. It should print something like this:
+   * Make a `curl` request like before, but this time direct it to the Lambda function URL.
+   * ```shell
+     curl -X POST "$HELLO_WORLD_LAMBDA_FUNCTION_URL" -d '{ "message": "Hello" }'
+     ```
+   * It should print something
+     like below. Notice the different value for the `deployment_environment` field.
      ```json
      {
-       "message": "Hello from an AWS Lambda function!",
-       "deployment-environment": "aws"
+       "message" : "Hello... Hello... Hello...",
+       "deployment_environment" : "aws"
      }
      ```
 
@@ -96,6 +98,11 @@ Here are some of my observations during my learning journey:
   AWS 'layers', and then also layer in your program onto it." Low reward in my opinion.
 * I'm surprised that AWS Lambda doesnt' support Java 17 in May 2022, when Java 17 has been out for ever 6 months and it
   has been known for a few years that Java 17 was going to be an LTS release. 
+* I'm a bit annoyed that I have to forego a traditional HTTP toolkit and instead code to AWS's proprietary event schema.
+  Specifically, I can't code my program to HTTP and instead code it to JSON-ified representations of HTTP requests. One
+  gripe in particular is that the body is base64 encoded. So my Lambda function has to check for `getIsBase64Encoded` and
+  then decode it. In HTTP toolkits, encoding and decoding happens transparently. For example, a framework like Micronaut
+  or Spring will just decode a gzip HTTP request body and you never need to know.
 
 
 ## Wish List

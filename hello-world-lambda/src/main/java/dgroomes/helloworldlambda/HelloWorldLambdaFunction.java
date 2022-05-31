@@ -5,6 +5,8 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import dgroomes.echo.Echo;
 
+import java.util.Base64;
+
 /**
  * This class represents an AWS Lambda function.
  * <p>
@@ -14,6 +16,7 @@ import dgroomes.echo.Echo;
 public class HelloWorldLambdaFunction implements RequestHandler<APIGatewayProxyRequestEvent, String> {
 
   private final Echo echo;
+  private Base64.Decoder decoder = Base64.getDecoder();
 
   /**
    * The default constructor will be called by AWS Lambda.
@@ -32,6 +35,9 @@ public class HelloWorldLambdaFunction implements RequestHandler<APIGatewayProxyR
   @Override
   public String handleRequest(APIGatewayProxyRequestEvent request, Context context) {
     String body = request.getBody();
+    if (request.getIsBase64Encoded()) {
+      body = new String(decoder.decode(body));
+    }
     return echo.echo(body);
   }
 }

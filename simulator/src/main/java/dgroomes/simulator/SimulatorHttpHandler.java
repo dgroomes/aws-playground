@@ -12,6 +12,8 @@ import org.apache.hc.core5.net.URIBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,7 +24,8 @@ import java.util.stream.Collectors;
  */
 class SimulatorHttpHandler implements HttpRequestHandler {
 
-  private RequestHandler<APIGatewayProxyRequestEvent, String> lambdaRequestHandler;
+  private final RequestHandler<APIGatewayProxyRequestEvent, String> lambdaRequestHandler;
+  private final Base64.Encoder encoder = Base64.getEncoder();
 
   SimulatorHttpHandler(RequestHandler<APIGatewayProxyRequestEvent, String> lambdaRequestHandler) {
     this.lambdaRequestHandler = lambdaRequestHandler;
@@ -30,14 +33,20 @@ class SimulatorHttpHandler implements HttpRequestHandler {
 
   @Override
   public void handle(final ClassicHttpRequest request, final ClassicHttpResponse response, final HttpContext context) throws HttpException, IOException {
-    String requestBody = EntityUtils.toString(request.getEntity());
-
     APIGatewayProxyRequestEvent apiGatewayRequest = new APIGatewayProxyRequestEvent();
-    apiGatewayRequest.setBody(requestBody);
 
-    String handlerResponse = lambdaRequestHandler.handleRequest(apiGatewayRequest, null);
-    StringEntity responseBody = new StringEntity(handlerResponse);
-    response.setEntity(responseBody);
+    {
+      String body = EntityUtils.toString(request.getEntity());
+      String encoded = encoder.encodeToString(body.getBytes(StandardCharsets.UTF_8));
+      apiGatewayRequest.setBody(encoded);
+      apiGatewayRequest.setIsBase64Encoded(true);
+    }
+
+    {
+      String handlerResponse = lambdaRequestHandler.handleRequest(apiGatewayRequest, null);
+      StringEntity responseBody = new StringEntity(handlerResponse);
+      response.setEntity(responseBody);
+    }
   }
 
   /**

@@ -11,10 +11,11 @@
 
 **NOTE**: This project was developed on macOS. It is for my own personal use.
 
-I'm going to start learning AWS by writing and deploying an AWS Lambda function using Java. I think this is one of the
-easier things to do from a conceptual standpoint and it's useful too.
+I need to learn some public cloud skills and AWS is the easiest choice. In this project I started my AWS learning journey
+by writing and deploying an AWS Lambda function using Java. Lambda is a great product. It's useful, conceptually simple,
+and cost-effective.
 
-I'll implement my function in Java 11 because Lambda supports only up to Java 11 (Corretto) as of May 2022. While I'm
+I've implemented my function in Java 11 because Lambda supports only up to Java 11 (Corretto) as of May 2022. While I'm
 interested in using Lambda's support for Docker images, I need to stick to the "paved road" to start with. I don't want
 to pile on caveats to my learning journey.
 
@@ -24,8 +25,8 @@ to pile on caveats to my learning journey.
 This project is designed across a multi-module Gradle project:
 
 * `hello-world-lambda/`
-  * The  is the module of importance. The `:hello-world-lambda` module represents the actual *Lambda function*. Specifically,
-    it has a class (? class name) that implements the AWS Handler interface (? name).
+  * The is the module of importance. The `:hello-world-lambda` module represents the actual *Lambda function*. Specifically,
+    it has a class that implements the AWS Handler interface `com.amazonaws.services.lambda.runtime.RequestHandler`.
 * `simulator/`
   * Simulates the AWS Lambda deployment environment. This is a runnable Java program that serves the Lambda function in
     a local web server. This is useful for your local development workflow. The simulator maps the HTTP request to an
@@ -34,12 +35,12 @@ This project is designed across a multi-module Gradle project:
 * `echo/`
   * This is a toy library. It echos a given message into a JSON string. 
 
-The program is uploaded to AWS and a Lambda *function URL* is configured to execute the Lambda function.  
+The program is uploaded to AWS and a Lambda [*function URL*](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html) is configured to execute the Lambda function.  
 
 
 ## Instructions
 
-Follow these instructions to test the program, deploy it locally, and deploy it to AWS as a proper Lambda function:
+Follow these instructions to test the program, deploy it locally in a simulator, and deploy it to AWS as a Lambda function:
 
 1. Use Java 11
 2. Run the test suite:
@@ -66,7 +67,7 @@ Follow these instructions to test the program, deploy it locally, and deploy it 
      ./gradlew :hello-world-lambda:buildZip
      ```
    * This builds the program distribution as a .zip file in `hello-world-lambda/build/distributions/hello-world-lambda.zip`
-6. Deploy the lambda function to AWS
+6. Deploy the Lambda function to AWS
    * Upload the program distribution .zip file using the AWS Lambda dashboard in the browser.
 7. Try it!
    * Make a `curl` request like before, but this time direct it to the Lambda function URL.
@@ -90,7 +91,7 @@ Here are some of my observations during my learning journey:
 * AWS Lambda gives a good developer experience, especially if you stay on the paved road. I would suggest, for example,
   that you stick with the official runtimes and not build a custom runtime. You are free to build a custom runtime, but
   if you can afford to exercise that amount of sophistication, I think you should consider deploying to a more generic
-  product, like ECS (Elastic Container Service). Consider a Java-based lambda function. You'll be tempted to create a
+  product, like ECS (Elastic Container Service). Consider a Java-based Lambda function. You'll be tempted to create a
   custom Java runtime image because you just know in your bones how overpowered Java is for short-lived requests. Java
   excels at high throughput, where things like the just-in-time compiler kick in. So you might want to create a reduced-size
   custom Java runtime image for your Lambda function. But then your Lambda development experience has gone from a "upload this ZIP file"
@@ -120,9 +121,12 @@ General clean-ups, TODOs and things I wish to implement for this project:
 * [ ] Consider renaming the 'echo' module something like 'data-enricher'. In playground examples, I want to model at
   vaguely realistic and useful problems and solutions. If I retool 'echo' as more of a message enricher which has to deal
   with JSON, then it becomes more interesting. And usefully, it can still be de-coupled from the Lambda code.
+* [ ] Make an AWS App Runner example. To me, App Runner is at the same level of convenience as Lambda. It's just at a (much) 
+  higher price point because of the always-on thing.
 
 ## Reference
 
 * [AWS docs: *AWS Lambda function handler in Java*](https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html?icmpid=docs_lambda_help)
 * [AWS docs: *Deploy Java Lambda functions with .zip or JAR file archives*](https://docs.aws.amazon.com/lambda/latest/dg/java-package.html)
 * [AWS docs: *Lambda function URLs*](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html)
+* [AWS App Runner](https://aws.amazon.com/apprunner/)

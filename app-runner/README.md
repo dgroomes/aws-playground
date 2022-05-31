@@ -40,6 +40,14 @@ deploy it using AWS App Runner.
    * TODO
 
 
+## Wish List
+
+General clean-ups, TODOs and things I wish to implement for this project:
+
+* [ ] Build the Docker image
+* [ ] Upload to AWS
+
+
 ## Reference
 
 * [AWS Elastic Container Registry](https://aws.amazon.com/ecr/)

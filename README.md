@@ -25,11 +25,13 @@ re-using the code.
 
 The sub-projects include:
 
+
 ### `lambda/`
 
 This project builds an AWS Lambda function with Java 11 and exposes it via a Lambda *function URL*.
 
 See the README in [lambda/](lambda/).
+
 
 ### `app-runner/`
 
@@ -37,23 +39,14 @@ An example microservice deployed to AWS App Runner.
 
 See the README in [app-runner/](app-runner/).
 
+
 ## Wish List
 
 General clean-ups, TODOs and things I wish to implement for this project:
 
-* [x] DONE Implement `echo/`. Use Jackson.
-* [x] DONE (this appeared to do what I needed it to, but I'm not sure if it's right. The libraries are in .jar files in
-  the .zip but the main module ('hello-world-lambda') is in class files in directories. I'm not really sure what AWS Lambda
-  needs exactly) Build the distribution zip
-* [x] DONE Implement `hello-world-lambda`.
-* [x] DONE Implement `simulator`.  Use Apache HttpComponents for a simple web server
-* [x] DONE Rename 'runner' to 'simulator'
-* [ ] Can HttpComponents serve ipv6?
-* [ ] Consider renaming the 'echo' module something like 'data-enricher'. In playground examples, I want to model at
-  vaguely realistic and useful problems and solutions. If I retool 'echo' as more of a message enricher which has to deal
-  with JSON, then it becomes more interesting. And usefully, it can still be de-coupled from the Lambda code.
 * [ ] IN PROGRESS Make an AWS App Runner example. To me, App Runner is at the same level of convenience as Lambda. It's just at a (much) 
   higher price point because of the always-on thing.
+
 
 ## Reference
 

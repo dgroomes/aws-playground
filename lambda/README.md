@@ -93,6 +93,23 @@ Here are some of my observations during my learning journey:
   or Spring will just decode a gzip HTTP request body and you never need to know.
 
 
+## Wish List
+
+General clean-ups, TODOs and things I wish to implement for this project:
+
+* [x] DONE Implement `echo/`. Use Jackson.
+* [x] DONE (this appeared to do what I needed it to, but I'm not sure if it's right. The libraries are in .jar files in
+  the .zip but the main module ('hello-world-lambda') is in class files in directories. I'm not really sure what AWS Lambda
+  needs exactly) Build the distribution zip
+* [x] DONE Implement `hello-world-lambda`.
+* [x] DONE Implement `simulator`.  Use Apache HttpComponents for a simple web server
+* [x] DONE Rename 'runner' to 'simulator'
+* [ ] Can HttpComponents serve ipv6?
+* [ ] Consider renaming the 'echo' module something like 'data-enricher'. In playground examples, I want to model at
+  vaguely realistic and useful problems and solutions. If I retool 'echo' as more of a message enricher which has to deal
+  with JSON, then it becomes more interesting. And usefully, it can still be de-coupled from the Lambda code.
+
+
 ## Reference
 
 * [AWS docs: *AWS Lambda function handler in Java*](https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html?icmpid=docs_lambda_help)

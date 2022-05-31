@@ -32,15 +32,30 @@ deploy it using AWS App Runner.
      ```
 5. Build the Docker image:
    * ```shell
-     docker build . -t dgroomes-aws-playground-app-runner:local
+     docker build . -t aws-playground-app-runner:local
      ```
 6. Run the program as a Docker container:
    * ```shell
-     docker run --rm -p 8080:8080 dgroomes-aws-playground-app-runner:local
+     docker run --rm -p 8080:8080 aws-playground-app-runner:local
      ```
    * Consider using the earlier `curl` command to exercise the server.
-8. Upload it
-   * TODO
+8. Upload the image to Amazon Elastic Container Registry (ECR)
+   * You'll need to get acquainted with ECR by reading the docs. This might take a while because you need to do things
+     like configure the `aws` CLI and create IAM profiles, if you haven't already. I have a profile named `cli` that I
+     gave the bare minimum permissions that I need for ECR. I used a command like the following to login my local `docker`
+     client to my ECR repo.
+   * ```shell
+     aws --profile cli ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin "$AWS_ECS_REGISTRY"
+     ```
+   * Finally, tag the Docker image with a unique tag (I enabled
+     immutable images in my ECR repo) with a command like the following.
+   * ```shell
+     docker tag aws-playground-app-runner:local "$AWS_ECS_REGISTRY/aws-playground-app-runner:1"
+     ```
+   * Push the image
+   * ```shell
+     docker push "$AWS_ECS_REGISTRY/aws-playground-app-runner:1"
+     ```
 9. Deploy it
    * TODO
 
@@ -50,7 +65,8 @@ deploy it using AWS App Runner.
 General clean-ups, TODOs and things I wish to implement for this project:
 
 * [x] DONE Build the Docker image
-* [ ] Upload to AWS
+* [x] DONE Upload to AWS ECR
+* [ ] Deploy to App Runner
 
 
 ## Reference

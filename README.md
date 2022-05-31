@@ -30,7 +30,8 @@ This project is designed across a multi-module Gradle project:
     it has a class (? class name) that implements the AWS Handler interface (? name).
 * `simulator/`
   * Simulates the AWS Lambda deployment environment. This is a runnable Java program that serves the Lambda function in
-    a local web server. This is useful for your local development workflow.
+    a local web server. This is useful for your local development workflow. The simulator maps the HTTP request to an
+    event object and invokes the function. Related: [AWS Lambda docs: *Request and response payloads*](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html#urls-payloads).
 * `echo/`
   * This is a toy library. It echos a given message into a JSON string. 
 
@@ -52,13 +53,15 @@ Follow these instructions to test the program, deploy it locally, and deploy it 
      ```
    * A local web server is serving the program. Interact with it with the following `curl` command.
    * ```shell
-     curl http://localhost:8080/hello-world
+     curl -X POST http://localhost:8080/ -d '
+     { "message": "Hello" }
+     '
      ```
    * It should respond with something like:
      ```json
      {
-       "message" : "Hello from an AWS Lambda function!",
-       "deployment-environment" : "local"
+       "message" : "Hello... Hello... Hello...",
+       "deployment_environment" : "local"
      }
      ```
 5. Build the program distribution:
@@ -104,10 +107,12 @@ General clean-ups, TODOs and things I wish to implement for this project:
   the .zip but the main module ('hello-world-lambda') is in class files in directories. I'm not really sure what AWS Lambda
   needs exactly) Build the distribution zip
 * [x] DONE Implement `hello-world-lambda`.
-* [ ] IN PROGRESS Implement `simulator`.  Use Apache HttpComponents for a simple web server
+* [x] DONE Implement `simulator`.  Use Apache HttpComponents for a simple web server
 * [x] DONE Rename 'runner' to 'simulator'
 * [ ] Can HttpComponents serve ipv6?
-
+* [ ] Consider renaming the 'echo' module something like 'data-enricher'. In playground examples, I want to model at
+  vaguely realistic and useful problems and solutions. If I retool 'echo' as more of a message enricher which has to deal
+  with JSON, then it becomes more interesting. And usefully, it can still be de-coupled from the Lambda code.
 
 ## Reference
 

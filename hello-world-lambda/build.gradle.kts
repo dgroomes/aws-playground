@@ -6,7 +6,7 @@ plugins {
 dependencies {
     api(project(":echo"))
     api("com.amazonaws:aws-lambda-java-core")
-    implementation("com.amazonaws:aws-lambda-java-events")
+    api("com.amazonaws:aws-lambda-java-events")
     runtimeOnly("com.amazonaws:aws-lambda-java-log4j2")
 }
 

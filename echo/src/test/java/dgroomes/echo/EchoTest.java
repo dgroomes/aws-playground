@@ -9,10 +9,10 @@ class EchoTest {
   @Test
   void echo() {
     Echo echo = new Echo("test-suite");
-    String message = "Hi there";
+    String inputJson = "{ \"message\": \"Hi\" }";
 
-    String json = echo.echo(message);
+    String outputJson = echo.echo(inputJson);
 
-    assertThat(json).isEqualToIgnoringWhitespace("{\"message\":\"Hi there!\", \"deployment-environment\":\"test-suite\"}");
+    assertThat(outputJson).isEqualToIgnoringWhitespace("{\"message\":\"Hi... Hi... Hi...\", \"deployment_environment\":\"test-suite\"}");
   }
 }

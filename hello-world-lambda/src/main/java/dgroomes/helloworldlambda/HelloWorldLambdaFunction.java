@@ -2,14 +2,16 @@ package dgroomes.helloworldlambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import dgroomes.echo.Echo;
-
-import java.util.Map;
 
 /**
  * This class represents an AWS Lambda function.
+ * <p>
+ * This Lambda function happens to be configured with a Lambda "function URL" which means that the even type is
+ * {@link APIGatewayProxyRequestEvent}.
  */
-public class HelloWorldLambdaFunction implements RequestHandler<Map<String, String>, String> {
+public class HelloWorldLambdaFunction implements RequestHandler<APIGatewayProxyRequestEvent, String> {
 
   private final Echo echo;
 
@@ -28,7 +30,8 @@ public class HelloWorldLambdaFunction implements RequestHandler<Map<String, Stri
   }
 
   @Override
-  public String handleRequest(Map<String, String> input, Context context) {
-    return echo.echo("Hello from an AWS Lambda function");
+  public String handleRequest(APIGatewayProxyRequestEvent request, Context context) {
+    String body = request.getBody();
+    return echo.echo(body);
   }
 }

@@ -52,3 +52,4 @@ General clean-ups, TODOs and things I wish to implement for this project:
 
 * [AWS Lambda](https://aws.amazon.com/lambda/)
 * [AWS App Runner](https://aws.amazon.com/apprunner/)
+* [AWS Elastic Container Service (ECS)](https://aws.amazon.com/ecs/)

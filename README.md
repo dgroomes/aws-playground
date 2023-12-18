@@ -16,14 +16,14 @@ by writing and deploying an AWS Lambda function using Java. Lambda is a great pr
 and cost-effective. I want to explore other products, like [AWS App Runner](https://aws.amazon.com/apprunner/).
 
 
-## Standalone sub-projects
+## Standalone subprojects
 
-This repository illustrates different concepts, patterns and examples via standalone sub-projects. Each sub-project is
-completely independent of the others and do not depend on the root project. This _standalone sub-project constraint_
-forces the sub-projects to be complete and maximizes the reader's chances of successfully running, understanding, and
+This repository illustrates different concepts, patterns and examples via standalone subprojects. Each subproject is
+completely independent of the others and do not depend on the root project. This _standalone subproject constraint_
+forces the subprojects to be complete and maximizes the reader's chances of successfully running, understanding, and
 re-using the code.
 
-The sub-projects include:
+The subprojects include:
 
 
 ### `lambda/`
@@ -44,7 +44,7 @@ See the README in [app-runner/](app-runner/).
 
 General clean-ups, TODOs and things I wish to implement for this project:
 
-* [ ] IN PROGRESS Make an AWS App Runner example. To me, App Runner is at the same level of convenience as Lambda. It's just at a (much) 
+* [ ] ABANDONED (Couldn't get this to work) Make an AWS App Runner example. To me, App Runner is at the same level of convenience as Lambda. It's just at a (much) 
   higher price point because of the always-on thing.
 
 

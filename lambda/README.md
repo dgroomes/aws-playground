@@ -1,6 +1,6 @@
 # lambda
 
-This project builds an AWS Lambda function with Java 11 and exposes it via a Lambda *function URL*.
+This project builds an AWS Lambda function with Java 21 and exposes it via a Lambda *function URL*.
 
 
 ## Design
@@ -8,32 +8,33 @@ This project builds an AWS Lambda function with Java 11 and exposes it via a Lam
 This project is implemented as a multi-module Gradle project:
 
 * `hello-world-lambda/`
-  * The is the module of importance. The `:hello-world-lambda` module represents the actual *Lambda function*. Specifically,
+  * This is the module of importance. The `:hello-world-lambda` module represents the actual *Lambda function*. Specifically,
     it has a class that implements the AWS Handler interface `com.amazonaws.services.lambda.runtime.RequestHandler`.
 * `simulator/`
   * Simulates the AWS Lambda deployment environment. This is a runnable Java program that serves the Lambda function in
     a local web server. This is useful for your local development workflow. The simulator maps the HTTP request to an
     event object and invokes the function. Related: [AWS Lambda docs: *Request and response payloads*](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html#urls-payloads).
-    Similarly, it base 64 encodes the payload, which Lambda also does.
+    Similarly, it base64 encodes the payload, which Lambda also does.
 * `echo/`
   * This is a toy library. It echos a given message into a JSON string.
 
 The program is uploaded to AWS and a Lambda [*function URL*](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html) is configured to execute the Lambda function.
 
-I've implemented my function in Java 11 because Lambda supports only up to Java 11 (Corretto) as of May 2022. While I'm
-interested in using Lambda's support for Docker images, I need to stick to the "paved road" to start with. I don't want
-to pile on caveats to my learning journey.
+I've implemented my function with Java 21. Thankfully AWS Lambda was quick to support the 21 release of Java after only
+about a month. While I'm also interested in using Lambda's support for Docker images, I need to stick to the "paved road"
+to start with. I don't want to pile on caveats to my learning journey.
+
 
 ## Instructions
 
 Follow these instructions to test the program, deploy it locally in a simulator, and deploy it to AWS as a Lambda function:
 
-1. Use Java 11
+1. Pre-requisite: Java 21
 2. Run the test suite:
    * ```shell
      ./gradlew test
      ```
-4. Deploy the program locally in the Lambda simulator:
+3. Deploy the program locally in the Lambda simulator:
    * ```shell
      ./gradlew :simulator:run
      ```
@@ -48,27 +49,27 @@ Follow these instructions to test the program, deploy it locally in a simulator,
        "deployment_environment" : "local"
      }
      ```
-5. Build the program distribution:
+4. Build the program distribution:
    * ```shell
      ./gradlew :hello-world-lambda:buildZip
      ```
    * This builds the program distribution as a .zip file in `hello-world-lambda/build/distributions/hello-world-lambda.zip`
-6. Deploy the Lambda function to AWS
+5. Deploy the Lambda function to AWS
    * Upload the program distribution .zip file using the AWS Lambda dashboard in the browser.
-7. Try it!
+6. Try it!
    * Make a `curl` request like before, but this time direct it to the Lambda function URL. Find the URL in the AWS Console
      and export it as an environment variable named `HELLO_WORLD_LAMBDA_FUNCTION_URL`. Use the below command.
    * ```shell
      curl -X POST "$HELLO_WORLD_LAMBDA_FUNCTION_URL" -d '{ "message": "Hello" }'
      ```
-   * It should print something
-     like below. Notice the different value for the `deployment_environment` field.
+   * It should print something like below. Notice the different value for the `deployment_environment` field.
      ```json
      {
        "message" : "Hello... Hello... Hello...",
        "deployment_environment" : "aws"
      }
      ```
+
 
 ## Observations
 

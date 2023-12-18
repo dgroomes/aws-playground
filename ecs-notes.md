@@ -1,7 +1,7 @@
 # ecs-notes
 
 This was another failure! I followed both [Deploy a Container Web App on Amazon ECS](https://aws.amazon.com/getting-started/guides/deploy-webapp-ecs/module-two/)
-and the very similar (yet slightly different so it makes you confused between the two) [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/)
+and the very similar (yet slightly different, so it makes you confused between the two) [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/)
 and could not get it work. The docs made me think I have to use CloudFormation, and in turn the CDK CLI, but really I should
 be able to use ECS directly, like you can with any other AWS product.
 

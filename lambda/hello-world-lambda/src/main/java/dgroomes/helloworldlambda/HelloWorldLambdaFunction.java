@@ -16,7 +16,7 @@ import java.util.Base64;
 public class HelloWorldLambdaFunction implements RequestHandler<APIGatewayProxyRequestEvent, String> {
 
   private final Echo echo;
-  private Base64.Decoder decoder = Base64.getDecoder();
+  private final Base64.Decoder decoder = Base64.getDecoder();
 
   /**
    * The default constructor will be called by AWS Lambda.
